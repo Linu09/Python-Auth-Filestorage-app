@@ -30,4 +30,4 @@
 
 ## About The Project
 
-This Project allows basic user authentication method enabled with a file upload and download mechanism from Google Cloud storage Account
+This Project allows users to upload and fetch various documents from Google Cloud Using basic login mechanism
