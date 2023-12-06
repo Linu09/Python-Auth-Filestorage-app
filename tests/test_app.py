@@ -29,7 +29,13 @@ class TestYourApplication(unittest.TestCase):
             # Use BytesIO to simulate file data
             file_data = (BytesIO(b'This is a test file content'), 'test.txt')
             response = self.app.post('/profile', data={'file': file_data}, content_type='multipart/form-data')
-            self.assertIn(b'File uploaded successfully', response.data)
+
+            # Check if the response is a redirect
+            self.assertEqual(response.status_code, 302)  
+
+            # Follow the redirect to the login page
+            redirected_response = self.app.get(response.headers['Location'])
+            self.assertIn(b'You should be redirected automatically to the target URL', redirected_response.data)
 
     # You can similarly write tests for other routes and functions
 
