@@ -16,6 +16,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+        li><a href="#Features">Prerequisites</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
@@ -57,6 +58,15 @@ Various Tools and Technoloies used for  building this project
 ## Getting Started
 
 Follow these steps to get the project up and running on your local machine.
+
+### Features
+
+- User authentication with unique User ID, Email, and Password
+- GCP integration for file storage (Google Cloud Storage)
+- Data persistence using BigQuery for user information
+- Secure file uploads and downloads
+- Responsive web interface with Flask templates
+- Password hashing for enhanced security
 
 ### Prerequisites
 
@@ -104,4 +114,8 @@ Press CTRL+C to quit
 - **Login**: Existing users can log in using their User ID, Email, and Password.
 - **Signup**: New users can sign up with a unique User ID, Email, and Password.
 - **Profile**: After logging in, users can upload files, view uploaded files, and download files.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
