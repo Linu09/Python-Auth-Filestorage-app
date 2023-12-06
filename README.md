@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 # Python-Auth-Filestorage-app
 
 
@@ -39,11 +41,19 @@ This Project allows users to upload and fetch various documents from Google Clou
 
 ### Built With
 
-* hi
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+Various Tools and Technoloies used for  building this project
+
+* Python3
+* glcoud
+* GCP BigQuery
+* GCP Container Registry
+* GitHub Repos + Actions
+* GCP Storage Bucket
+* HTML/CSS
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+
