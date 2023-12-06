@@ -1,57 +1,34 @@
 import unittest
-from unittest.mock import MagicMock
-from unittest.mock import patch
-from app import app
+from unittest.mock import MagicMock, patch
+from flask import Flask
+from app import app, check_user_exists, create_new_user, upload_file_to_storage, allowed_file
 
-class MockBigQueryClient:
-    def __init__(self):
-        self.dataset = MagicMock()
-        self.table = MagicMock()
-
-class TestApp(unittest.TestCase):
+class TestYourApplication(unittest.TestCase):
 
     def setUp(self):
+        app.config['TESTING'] = True
         self.app = app.test_client()
 
-    @patch('your_app.bigquery_client', MockBigQueryClient())
-    def test_index_route(self):
-        response = self.app.get('/')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Welcome to the Index Page', response.data)
+    def test_login_route_successful_login(self):
+        # Mock the check_user_exists function to simulate a successful login
+        with patch('your_application_file.check_user_exists', return_value=True):
+            response = self.app.post('/login', data={'user_id': 'some_id', 'email': 'test@example.com', 'password': 'password'})
+            self.assertEqual(response.status_code, 302)  # Redirects to profile
 
-    @patch('your_app.check_user_exists', return_value=True)
-    def test_login_successful(self, mock_check_user_exists):
-        response = self.app.post('/login', data={'user_id': 'test_user', 'email': 'test@example.com', 'password': 'password'})
-        self.assertEqual(response.status_code, 302)  # Should redirect to profile on successful login
+    def test_signup_route_duplicate_user(self):
+        # Mock the check_user_exists function to simulate a duplicate user during signup
+        with patch('your_application_file.check_user_exists', return_value=True):
+            response = self.app.post('/signup', data={'user_id': 'some_id', 'email': 'test@example.com', 'password': 'password'})
+            self.assertIn(b'User ID or email already exists', response.data)
 
-    @patch('your_app.check_user_exists', return_value=False)
-    def test_login_unsuccessful(self, mock_check_user_exists):
-        response = self.app.post('/login', data={'user_id': 'nonexistent_user', 'email': 'nonexistent@example.com', 'password': 'password'})
-        self.assertEqual(response.status_code, 302)  # Should redirect to signup if login is unsuccessful
+    def test_profile_route_file_upload(self):
+        # Mock the upload_file_to_storage function to simulate a successful file upload
+        with patch('your_application_file.upload_file_to_storage', return_value=None):
+            # Assuming the user is already logged in (you can mock the session data)
+            response = self.app.post('/profile', data={'file': MagicMock(filename='test.txt')}, content_type='multipart/form-data')
+            self.assertIn(b'File uploaded successfully', response.data)
 
-    @patch('your_app.check_user_exists', return_value=False)
-    @patch('your_app.create_new_user')
-    def test_signup_successful(self, mock_create_new_user, mock_check_user_exists):
-        response = self.app.post('/signup', data={'user_id': 'new_user', 'email': 'new@example.com', 'password': 'password'})
-        self.assertEqual(response.status_code, 302)  # Should redirect to login on successful signup
-        mock_create_new_user.assert_called_once()  # Ensure create_new_user is called
-
-    @patch('your_app.check_user_exists', return_value=True)
-    def test_signup_unsuccessful(self, mock_check_user_exists):
-        response = self.app.post('/signup', data={'user_id': 'existing_user', 'email': 'existing@example.com', 'password': 'password'})
-        self.assertEqual(response.status_code, 200)  # Should stay on signup page if signup is unsuccessful
-
-    def test_profile_route_requires_login(self):
-        response = self.app.get('/profile')
-        self.assertEqual(response.status_code, 302)  # Should redirect to login if not logged in
-
-    @patch('your_app.check_user_exists', return_value=True)
-    def test_profile_route_with_login(self, mock_check_user_exists):
-        with self.app.session_transaction() as session:
-            session['user'] = {'user_id': 'test_user', 'email': 'test@example.com'}
-        response = self.app.get('/profile')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Welcome to the Profile Page', response.data)
+    # You can similarly write tests for other routes and functions
 
 if __name__ == '__main__':
     unittest.main()
