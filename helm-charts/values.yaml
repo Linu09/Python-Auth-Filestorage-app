@@ -1,11 +1,11 @@
 # values.yaml
 replicaCount: 1
 image:
-  repository: your-docker-repo/your-app
+  repository: file-upload-repo/file-upload
   tag: latest
   pullPolicy: IfNotPresent
 service:
-  name: your-app-service
+  name: file-upload
   type: LoadBalancer
   port: 80
 hpa:
