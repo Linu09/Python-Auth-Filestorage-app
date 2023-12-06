@@ -11,9 +11,9 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     env:
-      BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
-      DATASET_ID: ${{ secrets.DATASET_ID }}
-      TABLE_ID: ${{ secrets.TABLE_ID }}
+      BUCKET_NAME: ${{ vars.BUCKET_NAME }}
+      DATASET_ID: ${{ vars.DATASET_ID }}
+      TABLE_ID: ${{ vars.TABLE_ID }}
       
     steps:
     - name: Checkout code
