@@ -31,11 +31,10 @@ class TestYourApplication(unittest.TestCase):
             response = self.app.post('/profile', data={'file': file_data}, content_type='multipart/form-data')
 
             # Check if the response is a redirect
-            self.assertEqual(response.status_code, 302)  
+            self.assertEqual(response.status_code, 302)
 
-            # Follow the redirect to the login page
-            redirected_response = self.app.get(response.headers['Location'])
-            self.assertIn(b'You should be redirected automatically to the target URL', redirected_response.data)
+            # Check if the redirection URL is correct
+            self.assertEqual(response.headers['Location'], 'http://localhost/login')
 
     # You can similarly write tests for other routes and functions
 
