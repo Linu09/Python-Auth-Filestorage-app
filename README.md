@@ -56,4 +56,22 @@ Various Tools and Technoloies used for  building this project
 <!-- GETTING STARTED -->
 ## Getting Started
 
+Follow these steps to get the project up and running on your local machine.
+
+### Prerequisites
+
+Before running the application, make sure you have the following:
+
+- Python installed (version 3.x recommended)
+- Google Cloud Platform account with Cloud Storage and BigQuery enabled
+- GCP Service Account credentials JSON file
+- Required Python packages (install using `pip install -r requirements.txt`)
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+
 
