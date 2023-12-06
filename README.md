@@ -65,13 +65,36 @@ Before running the application, make sure you have the following:
 - Python installed (version 3.x recommended)
 - Google Cloud Platform account with Cloud Storage and BigQuery enabled
 - GCP Service Account credentials JSON file
-- Required Python packages (install using `pip install -r requirements.txt`)
+- Dataset & bucket created in google cloud
+- All the above data passed into the python fil
 
 ### Installation
 
-1. Clone the repo
+1. Clone the repo & get inside the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/Linu09/Python-Auth-Filestorage-app.git
    ```
+2. Enable venv
+      ```sh
+   venv/bin/activate
+   ```
+3. Install the Required Python Packages
+      ```sh
+   pip install -r requirements.txt
+   ```
+4. Run app.py
+      ```sh
+   python app.py
+   ```
+5. Output will look like below and you will be able to access the application over http://127.0.0.1:5000
+ ```sh
+ * Serving Flask app 'app-2'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+```
 
 
