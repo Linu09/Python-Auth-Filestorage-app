@@ -97,4 +97,11 @@ Press CTRL+C to quit
  * Debugger is active!
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+
+- **Login**: Existing users can log in using their User ID, Email, and Password.
+- **Signup**: New users can sign up with a unique User ID, Email, and Password.
+- **Profile**: After logging in, users can upload files, view uploaded files, and download files.
 
