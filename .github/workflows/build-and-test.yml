@@ -56,5 +56,5 @@ jobs:
         push: true
         tags: gcr.io/file-upload-repo/file-upload:latest
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_KEY_FILE }}
+        GOOGLE_APPLICATION_CREDENTIALS: default_credential_file.json
         DOCKER_BUILDKIT: 1
