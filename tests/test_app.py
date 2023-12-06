@@ -1,5 +1,6 @@
 # tests/test_app.py
 import unittest
+from unittest.mock import MagicMock
 from unittest.mock import patch
 from your_app import app
 
