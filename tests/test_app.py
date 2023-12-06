@@ -1,14 +1,18 @@
-# tests/test_app.py
 import unittest
-from unittest.mock import MagicMock
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 from your_app import app
+
+class MockBigQueryClient:
+    def __init__(self):
+        self.dataset = MagicMock()
+        self.table = MagicMock()
 
 class TestApp(unittest.TestCase):
 
     def setUp(self):
         self.app = app.test_client()
 
+    @patch('your_app.bigquery_client', MockBigQueryClient())
     def test_index_route(self):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
@@ -25,9 +29,11 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 302)  # Should redirect to signup if login is unsuccessful
 
     @patch('your_app.check_user_exists', return_value=False)
-    def test_signup_successful(self, mock_check_user_exists):
+    @patch('your_app.create_new_user')
+    def test_signup_successful(self, mock_create_new_user, mock_check_user_exists):
         response = self.app.post('/signup', data={'user_id': 'new_user', 'email': 'new@example.com', 'password': 'password'})
         self.assertEqual(response.status_code, 302)  # Should redirect to login on successful signup
+        mock_create_new_user.assert_called_once()  # Ensure create_new_user is called
 
     @patch('your_app.check_user_exists', return_value=True)
     def test_signup_unsuccessful(self, mock_check_user_exists):
