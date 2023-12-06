@@ -143,7 +143,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@LinkedIn](https://www.linkedin,com/in/linujoseph09/) - linu.90@gmail.com
+Your Name - [@LinkedIn](https://www.linkedin.com/in/linujoseph09/) - linu.90@gmail.com
 
 Project Link: [https://github.com/Linu09/Python-Auth-Filestorage-app](https://github.com/Linu09/Python-Auth-Filestorage-app)
 
