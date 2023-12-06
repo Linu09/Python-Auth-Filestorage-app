@@ -29,5 +29,7 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
+<img width="544" alt="image" src="https://github.com/Linu09/Python-Auth-Filestorage-app/assets/38865727/396c3098-5912-4d26-a608-3239dd07964f">
+
 
 This Project allows users to upload and fetch various documents from Google Cloud Using basic login mechanism
