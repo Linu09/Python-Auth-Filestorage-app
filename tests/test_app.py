@@ -1,6 +1,7 @@
 import unittest
-from unittest.mock import MagicMock, patch
-from your_app import app
+from unittest.mock import MagicMock
+from unittest.mock import patch
+from app import app
 
 class MockBigQueryClient:
     def __init__(self):
