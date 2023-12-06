@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-# Python-Auth-Filestorage-app
+# Python Login System with GCP Integration
 
 
 <!-- TABLE OF CONTENTS -->
@@ -35,7 +35,7 @@
 <img width="474" alt="image" src="https://github.com/Linu09/Python-Auth-Filestorage-app/assets/38865727/444b97f6-7057-4546-a25d-52ab5162e8f7">
 
 
-This Project allows users to upload and fetch various documents from Google Cloud Using basic login mechanism
+This project demonstrates a simple web application using Flask for user authentication and Google Cloud Platform (GCP) services for storage and data persistence. Users can sign up, log in, upload files, and download files associated with their accounts.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -44,7 +44,7 @@ This Project allows users to upload and fetch various documents from Google Clou
 Various Tools and Technoloies used for  building this project
 
 * Python3
-* glcoud
+* gcloud CLI
 * GCP BigQuery
 * GCP Container Registry
 * GitHub Repos + Actions
