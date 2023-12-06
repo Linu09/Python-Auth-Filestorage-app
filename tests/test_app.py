@@ -34,7 +34,7 @@ class TestYourApplication(unittest.TestCase):
             self.assertEqual(response.status_code, 302)
 
             # Check if the redirection URL is correct
-            self.assertEqual(response.headers['Location'], 'http://localhost/login')
+            self.assertEqual(response.headers['Location'], 'http://localhost:5000/login')
 
     # You can similarly write tests for other routes and functions
 
