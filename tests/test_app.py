@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
+from io import BytesIO
 from flask import Flask
 from app import app, check_user_exists, create_new_user, upload_file_to_storage, allowed_file
 
@@ -25,7 +26,9 @@ class TestYourApplication(unittest.TestCase):
         # Mock the upload_file_to_storage function to simulate a successful file upload
         with patch('app.upload_file_to_storage', return_value=None):
             # Assuming the user is already logged in (you can mock the session data)
-            response = self.app.post('/profile', data={'file': MagicMock(filename='test.txt')}, content_type='multipart/form-data')
+            # Use BytesIO to simulate file data
+            file_data = (BytesIO(b'This is a test file content'), 'test.txt')
+            response = self.app.post('/profile', data={'file': file_data}, content_type='multipart/form-data')
             self.assertIn(b'File uploaded successfully', response.data)
 
     # You can similarly write tests for other routes and functions
