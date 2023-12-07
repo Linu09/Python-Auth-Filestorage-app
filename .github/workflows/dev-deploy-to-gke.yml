@@ -24,7 +24,9 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
       
     - name: Authenticate to GKE
-      run: gcloud container clusters get-credentials ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GCP_RESOURCE_REGION }} --project ${GCP_PROJECT}
+      run: |
+        gcloud container clusters get-credentials ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GCP_RESOURCE_REGION }} --project ${GCP_PROJECT}
+        gcloud components install kubectl
 
     - name: Deploy to GKE using Helm
       run: |
