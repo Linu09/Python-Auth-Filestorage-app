@@ -69,9 +69,8 @@ jobs:
           RAW_IMAGE=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/file-upload-repo/file-upload
           IMAGE_URI=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/file-upload-repofile-upload:$GITHUB_SHA
     
-          docker build .
-
-          docker tag $RAW_IMAGE $IMAGE_URI
+          docker build -t $RAW_IMAGE .
+          docker build -t $IMAGE_URI .
           docker push $RAW_IMAGE
           docker push $IMAGE_URI
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
