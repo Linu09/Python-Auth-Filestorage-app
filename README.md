@@ -74,7 +74,6 @@ Before running the application, make sure you have the following:
 - Google Cloud Platform account with Cloud Storage and BigQuery enabled
 - GCP Service Account credentials JSON file
 - Dataset & bucket created in google cloud
-- All the above data passed into the python fil
 
 ### Installation
 
