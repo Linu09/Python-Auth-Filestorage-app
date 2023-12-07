@@ -38,5 +38,5 @@ jobs:
           --namespace=default \
           --set image.repository=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/file-upload-repo/file-upload \
           --set image.tag=${IMAGE_TAG} \
-          $file-upload \
+          file-upload \
           helm-charts/
