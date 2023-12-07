@@ -22,13 +22,7 @@ jobs:
 
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
-
-    - name: Configure Docker
-      run: gcloud auth configure-docker ${GCR_HOST}/${GCP_PROJECT}
-
-    - name: Pull the Docker image from Google Artifact Registry
-      run: docker pull ${GCR_HOST}/${GCP_PROJECT}/${REPO_NAME}:${IMAGE_TAG}
-
+      
     - name: Authenticate to GKE
       run: gcloud container clusters get-credentials ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GCP_RESOURCE_REGION }} --project ${GCP_PROJECT}
 
