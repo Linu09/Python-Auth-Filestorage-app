@@ -16,7 +16,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        li><a href="#Features">Prerequisites</a></li>
+        <li><a href="#Features">Features</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
@@ -74,7 +74,6 @@ Before running the application, make sure you have the following:
 - Google Cloud Platform account with Cloud Storage and BigQuery enabled
 - GCP Service Account credentials JSON file
 - Dataset & bucket created in google cloud
-- All the above data passed into the python fil
 
 ### Installation
 

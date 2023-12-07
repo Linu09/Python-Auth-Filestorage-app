@@ -1,0 +1,5 @@
+# Chart.yaml
+apiVersion: v2
+name: file-upload-chart
+description: A Helm chart for your application
+version: 0.1.0
