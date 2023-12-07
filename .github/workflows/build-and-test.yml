@@ -66,8 +66,8 @@ jobs:
   # authenticating with Docker example
       - name: Build and push image to GAR
         run: |
-          RAW_IMAGE=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/$GCP_ARTIFACT_REPOSITORY_NAME/file-upload
-          IMAGE_URI=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/$GCP_ARTIFACT_REPOSITORY_NAME/file-upload:$GITHUB_SHA
+          RAW_IMAGE=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/file-upload-repo/file-upload
+          IMAGE_URI=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/file-upload-repofile-upload:$GITHUB_SHA
     
           docker build .
 
