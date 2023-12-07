@@ -132,6 +132,22 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+
+## Note
+
+default_credential_file.json -> the key file that can be used when you are working on the local environment which you can download from your service acount.
+
+But working on live environment its better to store the value as secret for pipeline use of this i have extracted the file in json format and stored in secret
+you can also do the same by using below command
+
+  ```sh
+   cat default_credential_file.json | base64
+   ```
+This will give you base64 value that you can store in github secret and use in your pipelines
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 <!-- LICENSE -->
 ## License
 
