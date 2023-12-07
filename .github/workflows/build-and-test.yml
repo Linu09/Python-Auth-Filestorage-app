@@ -40,8 +40,17 @@ jobs:
     - name: Run unit tests
       run: |
         pytest tests/
+        
+    - name: Sonarqube
+      run: |
+        echo "Should integrate with sonarScan"
+
+    - name: Veracode
+      run: |
+        echo "Should integrate with Veracode Pipeline Scans"
 
   build-and-push:
+    needs: build-and-test  # this will run only if the test cases are executed successfully
     runs-on: ubuntu-latest
 
     steps:
