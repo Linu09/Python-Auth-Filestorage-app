@@ -1,5 +1,6 @@
 # values.yaml
 replicaCount: 1
+apps: file-upload
 image:
   repository: file-upload-repo/file-upload
   tag: latest
