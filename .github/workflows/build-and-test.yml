@@ -16,7 +16,7 @@ jobs:
       TABLE_ID: ${{ vars.TABLE_ID }}
       GCP_RESOURCE_REGION: ${{ vars.GCP_RESOURCE_REGION }}
       GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
-      GCP_ARTIFACT_REPOSITORY_NAME: file-upload-repo
+      GCP_ARTIFACT_REPOSITORY_NAME: "file-upload-repo"
       
     steps:
     - name: Checkout code
@@ -66,8 +66,8 @@ jobs:
   # authenticating with Docker example
       - name: Build and push image to GAR
         run: |
-          RAW_IMAGE=$GCP_RESOURCE_REGION-docker.pkg.dev/$GCP_PROJECT/$GCP_ARTIFACT_REPOSITORY_NAME/file-upload
-          IMAGE_URI=$GCP_RESOURCE_REGION-docker.pkg.dev/$GCP_PROJECT/$GCP_ARTIFACT_REPOSITORY_NAME/file-upload:$GITHUB_SHA
+          RAW_IMAGE=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/$GCP_ARTIFACT_REPOSITORY_NAME/file-upload
+          IMAGE_URI=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/$GCP_ARTIFACT_REPOSITORY_NAME/file-upload:$GITHUB_SHA
     
           docker build .
 
