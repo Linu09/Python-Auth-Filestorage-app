@@ -1,5 +1,6 @@
 # values.yaml
 replicaCount: 1
+apps: file-upload
 image:
   repository: file-upload-repo/file-upload
   tag: latest
@@ -17,7 +18,7 @@ configmap:
   enabled: true
 secrets:
   enabled: true
-  BUCKET_NAME: your-gke-secret-bucket-name
-  DATASET_ID: your-gke-secret-dataset-id
-  TABLE_ID: your-gke-secret-table-id
-  GOOGLE_APPLICATION_CREDENTIALS: your-gke-secret-credential
+  BUCKET_NAME: gcpconfig
+  DATASET_ID: gcpconfig
+  TABLE_ID: gcpconfig
+  GOOGLE_APPLICATION_CREDENTIALS: serviceaccounttoken

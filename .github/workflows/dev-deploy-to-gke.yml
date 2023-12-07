@@ -1,0 +1,41 @@
+name: Deploy to GKE
+
+on:
+  workflow_dispatch: # This event triggers the workflow manually
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      GCP_RESOURCE_REGION: ${{ vars.GCP_RESOURCE_REGION }}
+      GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+      IMAGE_TAG: ${{ vars.IMAGE_TAG }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_KEY_FILE }}
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+
+    - name: Configure Docker
+      run: gcloud auth configure-docker ${GCR_HOST}/${GCP_PROJECT}
+
+    - name: Pull the Docker image from Google Artifact Registry
+      run: docker pull ${GCR_HOST}/${GCP_PROJECT}/${REPO_NAME}:${IMAGE_TAG}
+
+    - name: Authenticate to GKE
+      run: gcloud container clusters get-credentials ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GCP_RESOURCE_REGION }} --project ${GCP_PROJECT}
+
+    - name: Deploy to GKE using Helm
+      run: |
+        helm upgrade --install \
+          --namespace=default \
+          --set image.repository=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/file-upload-repo/file-upload \
+          --set image.tag=${IMAGE_TAG} \
+          file-upload helm-charts/
