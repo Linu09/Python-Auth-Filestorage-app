@@ -14,6 +14,9 @@ jobs:
       BUCKET_NAME: ${{ vars.BUCKET_NAME }}
       DATASET_ID: ${{ vars.DATASET_ID }}
       TABLE_ID: ${{ vars.TABLE_ID }}
+      GCP_RESOURCE_REGION: ${{ vars.GCP_RESOURCE_REGION }}
+      GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+      GCP_ARTIFACT_REPOSITORY_NAME: file-upload-repo
       
     steps:
     - name: Checkout code
@@ -44,21 +47,32 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
+        
+      # authenticating with Gcloud example
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_KEY_FILE }}
-          export_default_credentials: true
+          credentials_json: ${{ secrets.GCP_KEY_FILE }}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        
+      - name: Login to GAR
+        uses: docker/login-action@v2
+        with:
+          registry: "${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev"
+          username: _json_key_base64
+          password: ${{ secrets.GCP_KEY_FILE }}
 
-      - name: Configure Docker to use gcloud
+  # authenticating with Docker example
+      - name: Build and push image to GAR
         run: |
-          echo "GOOGLE_APPLICATION_CREDENTIALS=default_credential_file.json" >> $GITHUB_ENV
-          gcloud auth configure-docker
+          RAW_IMAGE=$GCP_RESOURCE_REGION-docker.pkg.dev/$GCP_PROJECT/$GCP_ARTIFACT_REPOSITORY_NAME/file-upload
+          IMAGE_URI=$GCP_RESOURCE_REGION-docker.pkg.dev/$GCP_PROJECT/$GCP_ARTIFACT_REPOSITORY_NAME/file-upload:$GITHUB_SHA
+    
+          docker build .
 
-      - name: Build and push Docker image
-        run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/your-image-name .
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/your-image-name
-
+          docker tag $RAW_IMAGE $IMAGE_URI
+          docker push $RAW_IMAGE
+          docker push $IMAGE_URI
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
+        shell: bash
