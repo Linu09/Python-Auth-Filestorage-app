@@ -30,7 +30,7 @@ jobs:
       run: docker pull ${GCR_HOST}/${GCP_PROJECT}/${REPO_NAME}:${IMAGE_TAG}
 
     - name: Authenticate to GKE
-      run: gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} --zone ${GKE_ZONE} --project ${GCP_PROJECT}
+      run: gcloud container clusters get-credentials ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GCP_RESOURCE_REGION }} --project ${GCP_PROJECT}
 
     - name: Deploy to GKE using Helm
       run: |
