@@ -35,3 +35,15 @@ jobs:
           --set image.repository=${{ vars.GCP_RESOURCE_REGION }}-docker.pkg.dev/$GCP_PROJECT/file-upload-repo/file-upload \
           --set image.tag=${IMAGE_TAG} \
           file-upload helm-charts/
+    - name: Wait and Check Pod Status
+      run: |
+        sleep 60  # Adjust the sleep duration based on your deployment time
+          
+        POD_STATUS=$(kubectl get pod -l app=file-upload -o jsonpath='{.items[0].status.phase}')
+          
+        if [ "$POD_STATUS" != "Running" ]; then
+          echo "Pod status is $POD_STATUS. Rolling back..."
+          helm rollback --force file-upload  # Roll back to the previous revision
+        else
+          echo "Pod is running successfully."
+        fi
